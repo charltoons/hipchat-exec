@@ -1,6 +1,6 @@
 {
   "author": "Charlton Roberts",
-  "name": "hipchatter",
+  "name": "hipchat-exec",
   "description": "A HipChat Bot. Watches for commands in a HipChat room, then executes the appropriate shell script.",
   "version": "0.0.1",
   "keywords": [
@@ -12,7 +12,8 @@
     "hipchatter",
     "api",
     "hipchatter",
-    "shell"
+    "shell",
+    "exec"
   ],
   "repository": {
     "type": "git",
@@ -20,8 +21,7 @@
   },
   "main": "hipchatter.js",
   "dependencies": {
-    "hipchatter": "*",
-    "execSync": "~1.0.1-pre"
+    "hipchatter": "*"
   },
   "engines": {
     "node": "*"
