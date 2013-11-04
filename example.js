@@ -7,7 +7,7 @@ var HipchatExec = require('./hipchat-exec');
 var key = process.argv[2];
 var HCExec = new HipchatExec({
     token: key,
-    room: 'Projeqt Command Test',
+    room: 'Room name or id',
     frequency: 4000,
     commands: {
         test: 'echo $NODE_ENV'
