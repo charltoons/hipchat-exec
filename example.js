@@ -1,18 +1,17 @@
 //To run:
 //      $ node example.js [your-hipchat-api-key] [word]
 
-var Hipchatter = require('./hipchatter');
+var HipchatExec = require('./hipchat-exec');
     
 //pass the constructor a config object with your key
 var key = process.argv[2];
-var hipchatter = new Hipchatter(key);
-
-//sample method
-// hipchatter.rooms(function(err, rooms){
-//     if (err) console.log(err);
-//     console.log(rooms);
-// });
-
-hipchatter.history('<insert room name here>', function(err, rooms){
-    console.log(rooms);
+var HCExec = new HipchatExec({
+    token: key,
+    room: 'Projeqt Command Test',
+    frequency: 5000,
+    commands: {
+        test: 'echo $NODE_ENV'
+    }
 });
+HCExec.run();
+

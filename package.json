@@ -1,7 +1,7 @@
 {
   "author": "Charlton Roberts",
   "name": "hipchatter",
-  "description": "Wrapper for the HipChat API (v2)",
+  "description": "A HipChat Bot. Watches for commands in a HipChat room, then executes the appropriate shell script.",
   "version": "0.0.1",
   "keywords": [
     "hipchat",
@@ -10,15 +10,18 @@
     "hip",
     "atlassian",
     "hipchatter",
-    "api"
+    "api",
+    "hipchatter",
+    "shell"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/charltoons/hipchatter.git"
+    "url": "https://github.com/charltoons/hipchat-exec.git"
   },
   "main": "hipchatter.js",
   "dependencies": {
-    "hipchatter": "git+https://user@hostname/project/blah.git#commit-ish"
+    "hipchatter": "*",
+    "execSync": "~1.0.1-pre"
   },
   "engines": {
     "node": "*"
