@@ -26,12 +26,22 @@ HipchatExec = (function() {
   }
 
   HipchatExec.prototype.run = function() {
-    var runFunction;
+    var self;
 
-    runFunction = function() {
-      return console.log('test');
-    };
-    return setInterval(runFunction, this.frequency);
+    self = this;
+    return setInterval((function() {
+      return self.pollHipchat();
+    }), this.frequency);
+  };
+
+  HipchatExec.prototype.pollHipchat = function() {
+    return this.hipchatter.history(this.room, function(err, history) {
+      if (err != null) {
+        return console.error('Hipchat error ' + err);
+      } else {
+        return console.log(history);
+      }
+    });
   };
 
   return HipchatExec;

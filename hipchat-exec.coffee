@@ -13,8 +13,13 @@ class HipchatExec
         @room = config.room
         @hipchatter = new Hipchatter(@token)
     run: ->
-        runFunction = -> console.log 'test'
-        setInterval runFunction, @frequency
+        self = @
+        setInterval (-> self.pollHipchat()), @frequency
+    pollHipchat: ->
+        @hipchatter.history @room, (err, history)->
+            if err? then console.error 'Hipchat error '+err
+            else console.log history
+
 
 #export
 module.exports = HipchatExec
