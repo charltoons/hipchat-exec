@@ -1,7 +1,7 @@
 http = require('http')
 path = require('path')
 Hipchatter = require('hipchatter')
-sh = require('execSync')
+exec = require('child_process').exec
   
 # HipchatExec constructor
 class HipchatExec
@@ -12,13 +12,40 @@ class HipchatExec
         @frequency = config.frequency
         @room = config.room
         @hipchatter = new Hipchatter(@token)
+        @last = new Date
     run: ->
         self = @
         setInterval (-> self.pollHipchat()), @frequency
     pollHipchat: ->
+        self = @
         @hipchatter.history @room, (err, history)->
             if err? then console.error 'Hipchat error '+err
-            else console.log history
+            else 
+                # for all the messages in the found history
+                for item in history.items
+
+                    # only check messages that we havent checked 
+                    # since the global process started
+                    date = new Date item.date
+                    if date > self.last 
+                        self.last = date
+
+                        # check each of the commands to see if they match
+                        for cmd, script of self.commands
+
+                            # console.log 'checking '+cmd+' in '+item.message
+
+                            # if we have a match (someone issued the command)
+                            if item.message is cmd
+
+                                # run the script
+                                console.log 'Command: '+cmd
+                                exec script, (err, stdout, stderr)->
+                                    if err? then console.error 'Command error '+err
+                                    console.log stdout
+                                    console.error stderr
+
+
 
 
 #export
