@@ -2,7 +2,7 @@
   "author": "Charlton Roberts",
   "name": "hipchat-exec",
   "description": "A HipChat Bot. Watches for commands in a HipChat room, then executes the appropriate shell script.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "hipchat",
     "hip",

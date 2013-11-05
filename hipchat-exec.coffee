@@ -9,6 +9,7 @@ class HipchatExec
         @commands = {}
         @commands[cmd] = script for cmd, script of config.commands
         @token = config.token
+        @notify_token = config.notify_token
         @frequency = config.frequency
         @room = config.room
         @hipchatter = new Hipchatter(@token)
@@ -40,6 +41,10 @@ class HipchatExec
 
                                 # run the script
                                 console.log 'Command: '+cmd
+                                message = 'Heard <pre>'+cmd+'</pre><br />Ran <pre>'+script+'</pre>'
+                                @hipchatter.notify self.room, message, self.notify_token, (err, response)->
+                                    if err? then console.error 'Message error', err
+                                    else console.log 'Message successful'
                                 exec script, (err, stdout, stderr)->
                                     if err? then console.error 'Command error '+err
                                     console.log stdout

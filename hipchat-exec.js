@@ -20,6 +20,7 @@ HipchatExec = (function() {
       this.commands[cmd] = script;
     }
     this.token = config.token;
+    this.notify_token = config.notify_token;
     this.frequency = config.frequency;
     this.room = config.room;
     this.hipchatter = new Hipchatter(this.token);
@@ -40,7 +41,7 @@ HipchatExec = (function() {
 
     self = this;
     return this.hipchatter.history(this.room, function(err, history) {
-      var cmd, date, item, script, _i, _len, _ref, _results;
+      var cmd, date, item, message, script, _i, _len, _ref, _results;
 
       if (err != null) {
         return console.error('Hipchat error ' + err);
@@ -61,6 +62,14 @@ HipchatExec = (function() {
                 script = _ref1[cmd];
                 if (item.message === cmd) {
                   console.log('Command: ' + cmd);
+                  message = 'Heard <pre>' + cmd + '</pre><br />Ran <pre>' + script + '</pre>';
+                  this.hipchatter.notify(self.room, message, self.notify_token, function(err, response) {
+                    if (err != null) {
+                      return console.error('Message error', err);
+                    } else {
+                      return console.log('Message successful');
+                    }
+                  });
                   _results1.push(exec(script, function(err, stdout, stderr) {
                     if (err != null) {
                       console.error('Command error ' + err);
@@ -73,7 +82,7 @@ HipchatExec = (function() {
                 }
               }
               return _results1;
-            })());
+            }).call(this));
           } else {
             _results.push(void 0);
           }
