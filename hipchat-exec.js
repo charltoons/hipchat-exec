@@ -62,12 +62,12 @@ HipchatExec = (function() {
                 script = _ref1[cmd];
                 if (item.message === cmd) {
                   console.log('Command: ' + cmd);
-                  message = 'Heard <pre>' + cmd + '</pre><br />Ran <pre>' + script + '</pre>';
-                  this.hipchatter.notify(self.room, message, self.notify_token, function(err, response) {
+                  message = 'Received: <strong>' + cmd + '</strong><br />Running: <code>' + script + '</code>';
+                  self.hipchatter.notify(self.room, message, self.notify_token, function(err, response) {
                     if (err != null) {
                       return console.error('Message error', err);
                     } else {
-                      return console.log('Message successful');
+                      return console.log('Message successful: ' + message);
                     }
                   });
                   _results1.push(exec(script, function(err, stdout, stderr) {
@@ -82,7 +82,7 @@ HipchatExec = (function() {
                 }
               }
               return _results1;
-            }).call(this));
+            })());
           } else {
             _results.push(void 0);
           }

@@ -8,8 +8,8 @@ var key = process.argv[2];
 var room_notification_key = process.argv[3];
 var HCExec = new HipchatExec({
     token: key,
-    notify_token: room_notification_key
-    room: 'Room name or id',
+    notify_token: room_notification_key,
+    room: 'Projeqt Command Test',
     frequency: 4000,
     commands: {
         test: 'echo $NODE_ENV'
