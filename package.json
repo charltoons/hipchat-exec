@@ -19,7 +19,7 @@
     "type": "git",
     "url": "https://github.com/charltoons/hipchat-exec.git"
   },
-  "main": "hipchatter.js",
+  "main": "hipchat-exec.js",
   "dependencies": {
     "hipchatter": "*"
   },
